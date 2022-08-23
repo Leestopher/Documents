@@ -71,14 +71,14 @@ sheet1 %>% group_by(dim_deviceCategory) %>%
     theme(plot.title = element_text(hjust = 0.5))
 
 #Time series of Sessions by month
-sheet1 %>% group_by(date) %>%
+sheet1 %>% group_by(date, dim_deviceCategory) %>%
     summarise(Sessions = mean(Sessions)) %>%
-    ggplot(aes(x = date, y = Sessions)) +
+    ggplot(aes(x = date, y = Sessions, color = dim_deviceCategory)) +
     geom_line() +
     scale_y_continuous(labels = comma) +
     xlab("Date") +
     ylab("# of Sessions") +
-    labs(title = "Time Series of Total Sessions") +
+    labs(title = "Time Series of Total Sessions", color = "Device") +
     theme_bw() +
     theme(plot.title = element_text(hjust = 0.5))
 
